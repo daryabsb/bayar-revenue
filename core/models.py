@@ -16,7 +16,7 @@ class Item(models.Model):
     updated = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return self.name
+        return f'{self.name} - {self.value}'
 
 class Revenue(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='revenues')
@@ -27,7 +27,7 @@ class Revenue(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.item.name
+        return f'{self.item.name} - {self.quantity} ({self.total})'
 
     def save(self, *args, **kwargs):
         self.total = self.item.value * self.quantity
