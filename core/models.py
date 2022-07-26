@@ -29,6 +29,13 @@ class Revenue(models.Model):
     def __str__(self):
         return self.item.name
 
+    def save(self, *args, **kwargs):
+        self.total = self.item.value * self.quantity
+
+        super().save(*args,**kwargs)
+
+
+
 
 class Expense(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='expenses')
